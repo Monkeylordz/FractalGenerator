@@ -3,6 +3,8 @@ package model.drawing;
 import model.fractal.Fractal;
 import model.fractal.StrangeAttractor;
 
+import java.awt.image.Raster;
+
 public class AttractorDrawing extends Drawing {
     protected StrangeAttractor attractor;
 
@@ -23,6 +25,15 @@ public class AttractorDrawing extends Drawing {
 
     @Override
     public void draw() {
+        // Clear
+        for (int i = 0; i < drawing.getWidth(); i++)
+        {
+            for (int j = 0; j < drawing.getHeight(); j++)
+            {
+                drawing.setRGB(i, j, 0);
+            }
+        }
+
         for (int i = 0; i < attractor.initialIterations; i++) {
             attractor.iterate();
         }
@@ -48,7 +59,7 @@ public class AttractorDrawing extends Drawing {
         return newX;
     }
 
-    // Effect: Scales real x coordinate to image coordinate
+    // Effect: Scales real y coordinate to image coordinate
     // Bounds centered on (0,0)
     protected int scaleForImageY(double y) {
         if ((y < -(boundHeight / 2)) || (y > (boundHeight / 2))) {

@@ -2,21 +2,28 @@ package ui;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 
 public class EditMenu extends JPanel {
     private SettingsDialog settings;
+    private JPanel buttonArea;
 
     public EditMenu() {
+        setLayout(new GridLayout(2, 1, 5, 4));
         setBackground(Color.LIGHT_GRAY);
-        setLayout(new GridLayout(0,1, 5, 10));
         setSize(new Dimension(0 , 0));
         settings = new SettingsDialog();
-        add(settings);
+        setSettings(settings);
+
+        buttonArea = new JPanel(new GridLayout(0,1, 5, 4));
+        buttonArea.setBackground(Color.LIGHT_GRAY);
+        buttonArea.setSize(new Dimension(0 , 0));
+        add(buttonArea, 1);
     }
 
     public void setSettings(SettingsDialog s) {
-        remove(settings);
+        if (settings != null) {
+            remove(settings);
+        }
         settings = s;
         add(settings, 0);
     }
@@ -25,4 +32,7 @@ public class EditMenu extends JPanel {
         return settings;
     }
 
+    public JPanel getButtonArea() {
+        return buttonArea;
+    }
 }

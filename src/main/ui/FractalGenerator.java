@@ -114,7 +114,7 @@ public class FractalGenerator extends JFrame {
             display.setDrawing(SettingsParser.parseSettings(editMenu.getSettings()), palette);
             updateDisplay();
         });
-        editMenu.add(go);
+        editMenu.getButtonArea().add(go);
     }
 
     private void addZoomInButton() {
@@ -123,7 +123,7 @@ public class FractalGenerator extends JFrame {
             display.zoomIn();
             updateDisplay();
         });
-        editMenu.add(zoomIn);
+        editMenu.getButtonArea().add(zoomIn);
     }
 
     private void addZoomOutButton() {
@@ -132,16 +132,16 @@ public class FractalGenerator extends JFrame {
             display.zoomOut();
             updateDisplay();
         });
-        editMenu.add(zoomOut);
+        editMenu.getButtonArea().add(zoomOut);
     }
 
     private void addAnimateButton() {
         JButton animate = new JButton("Animate");
         animate.addActionListener(e -> animate());
-        editMenu.add(animate);
+        editMenu.getButtonArea().add(animate);
     }
 
-    private void setEditMenu(SettingsDialog settings) {
+    private void setSettings(SettingsDialog settings) {
         editMenu.setVisible(true);
         editMenu.setSettings(settings);
     }
@@ -191,7 +191,7 @@ public class FractalGenerator extends JFrame {
         SettingsDialog settings = new SettingsDialog(
                 Fractal.FractalType.JULIA,
                 JULIA_OPTIONS,
-                new String[]{"700", "400", "2", "0", "0", "0", "0", "1"});
+                new String[]{"700", "400", "2", "0.1", "0.604", "0", "0", "1"});
         confirmSettings(settings);
     }
 
@@ -209,7 +209,7 @@ public class FractalGenerator extends JFrame {
                 JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null);
         if (result == JOptionPane.OK_OPTION) {
             display.setDrawing(SettingsParser.parseSettings(settings), palette);
-            setEditMenu(settings);
+            setSettings(settings);
         }
     }
 
@@ -222,7 +222,7 @@ public class FractalGenerator extends JFrame {
     }
 
     private void updateSettings() {
-        setEditMenu(SettingsParser.parseDrawing(display.getDrawing()));
+        setSettings(SettingsParser.parseDrawing(display.getDrawing()));
     }
 
     private void changePalette() {
